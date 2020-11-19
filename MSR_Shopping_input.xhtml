@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>JSF_TEST</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <h2>ここはJSFテスト入力画面 ! !</h2>
+        <h2> MSRショッピングサイト </h2>
+        <hr/>
+        <h:form>
+        <h2>お客様情報：</h2>
+            <h:panelGrid columns="3">
+                 <h:outputLabel value="名前："/>
+                 <h:inputText id="name" required="true" value="#{MSR_Base.name}" size="30" requiredMessage="名前を入力してください！">
+                     <f:validateLength minimum="2" maximum="20"/>
+                     <f:ajax event="blur" execute="@this" render="name_err"/>
+                 </h:inputText>    
+                 <h:message for="name" id="name_err" errorClass="err"/>
+                 
+                 <h:outputLabel value="住所１："/>
+                 <h:selectOneMenu value="#{MSR_Base.ads}" required="true" requiredMessage="住所１を選択してください">
+                     <f:selectItem itemLabel="住所１を選択してください" noSelectionOption="true"/>
+                     <f:selectItem itemValue="東京都"/>                 
+                     <f:selectItem itemValue="神奈川県"/>
+                     <f:selectItem itemValue="千葉県"/>
+                     <f:selectItem itemValue="埼玉県"/>
+                 </h:selectOneMenu>
+                 
+                 <h:outputLabel value="住所２："/>
+                 <h:inputText id="adss" required="true"  value="#{MSR_Base.adss}" size="30" requiredMessage="住所２を入力してください！">
+                     <f:validateLength minimum="2" maximum="40"/>
+                     <f:ajax event="blur" execute="@this" render="adss_err"/>
+                 </h:inputText>
+                 <h:message for="adss" id="adss_err" errorClass="err"/>
+                 
+                 <h:outputLabel value="性別："/>
+                 <h:selectOneRadio value="#{MSR_Base.sex}">
+                    <f:selectItem itemLabel="1" itemValue="男性"/>
+                    <f:selectItem itemLabel="2" itemValue="女性"/>
+                 </h:selectOneRadio>
+              
+                 <h:outputLabel value="血液型："/>
+                 <h:selectOneMenu value="#{MSR_Base.blood}">
+                     <f:selectItem itemValue="1" itemLabel="血液型を選択してください" noSelectionOption="true"/>
+                     <f:selectItem itemValue="2" itemLabel="A型"/>
+                     <f:selectItem itemValue="3" itemLabel="B型"/>
+                     <f:selectItem itemValue="4" itemLabel="O型"/>
+                     <f:selectItem itemValue="5" itemLabel="AB型"/>
+                 </h:selectOneMenu>
+                 
+                 <h:outputLabel value="電話番号："/>
+                 <h:inputText id="phoneno" required="true"  value="#{MSR_Base.phoneno}" size="30" requiredMessage="電話番号を入力してください！">
+                 <f:validateRegex pattern="(^¥d{3})-.x"/>
+                 <f:ajax event="blur" execute="@this" render="phoneno_err"/>
+                 </h:inputText>
+                 <h:message for="phoneno" id="phoneno_err" errorClass="err"/>
+                 
+                 <h:outputLabel value="生年月日："/>
+                 <h:inputText id="date" required="true"  value="#{MSR_Base.date}" size="30" requiredMessage="生年月日を入力してください！">
+                     <f:convertDateTime pattern="yyyy/M/d"/>
+                 </h:inputText>
+                 <h:message for="date" errorClass="err"/>
+             
+            </h:panelGrid>
+         </h:form>
+        <h2>ご注文情報：</h2><br/>
+        <h:form>
+        <h:panelGrid columns="3">
+                 <h:outputLabel value="商品コード："/>
+                 <h:inputText id="comno" required="true"  value="#{MSR_Base.comno}" size="30" requiredMessage="商品コードを入力してください！">
+                     <f:validateRegex pattern="(^¥d{3})-.x"/>
+                     <f:ajax event="blur" execute="@this" render="comno_err"/>
+                 </h:inputText>    
+                 <h:message for="comno" errorClass="err"/>
+                 
+                 <h:outputLabel value="商品名："/>
+                 <h:inputText id="comname" required="true"  value="#{MSR_Base.comname}" size="30" requiredMessage="商品名を入力してください">
+                     <f:validateLength minimum="2" maximum="30"/>
+                     <f:ajax event="blur" execute="@this" render="comname_err"/>
+                 </h:inputText>
+                 <h:message for="comname" id="conname_err" errorClass="err"/>
+                 
+                 <h:outputLabel value="商品価格："/>
+                 <h:inputText id="comprice" required="true"  value="#{MSR_Base.comprice}" size="30" requiredMessage="商品価格を入力してください">
+                     <f:validateLength minimum="100" maximum="1000000"/>
+                     <f:ajax event="blur" execute="@this" render="comprice_err"/>
+                 </h:inputText>    
+                 <h:message for="comprice" id="comprice_err" errorClass="err"/>
+                 
+                 <h:outputLabel value="商品数量："/>
+                 <h:inputText id="comno" required="true"  value="#{MSR_Base.comno}" size="30" requiredMessage="数量を入力してください">
+                     <f:validateLength minimum="1" maximum="100"/>
+                     <f:ajax event="blur" execute="@this" render="comno_err"/>
+                 </h:inputText>     
+                 <h:message for="comno" id="comno_err" errorClass="err"/>
+                 
+        </h:panelGrid>
+        </h:form>
+        <h2>お客様アンケート:</h2>
+        <h:form>
+            <h:outputLabel value="趣味："/>
+            <h:selectManyCheckbox value="#{MSR_Base.savor}">
+                <f:selectItem itemValue="1" itemLabel="スポーツ"/>
+                <f:selectItem itemValue="2" itemLabel="ショッピング"/>
+                <f:selectItem itemValue="3" itemLabel="旅行"/>
+                <f:selectItem itemValue="4" itemLabel="映画鑑賞"/>
+                <f:selectItem itemValue="5" itemLabel="音楽鑑賞"/>
+                <f:selectItem itemValue="6" itemLabel="ゲーム"/>
+                <f:selectItem itemValue="7" itemLabel="その他"/>
+            </h:selectManyCheckbox>    
+            
+            <h:outputLabel value="好きなスポーツは："/>
+            <h:selectManyCheckbox value="#{MSR_Base.sport}">
+                <f:selectItem itemValue="1" itemLabel="野球"/>
+                <f:selectItem itemValue="2" itemLabel="サッカー"/>
+                <f:selectItem itemValue="3" itemLabel="陸上"/>
+                <f:selectItem itemValue="4" itemLabel="水泳"/>
+                <f:selectItem itemValue="5" itemLabel="テニス"/>
+                <f:selectItem itemValue="6" itemLabel="その他"/>
+            </h:selectManyCheckbox>
+            
+            <h:outputLabel value="行きたいとこるは："/><br/>
+            
+            <h:outputLabel value="（国内）："/>
+            <h:selectManyCheckbox value="#{MSR_Base.dome}">
+                <f:selectItem itemValue="1" itemLabel="北海道"/>
+                <f:selectItem itemValue="2" itemLabel="東北"/>
+                <f:selectItem itemValue="3" itemLabel="上越-信越"/>
+                <f:selectItem itemValue="4" itemLabel="関東"/>
+                <f:selectItem itemValue="5" itemLabel="東海"/>
+                <f:selectItem itemValue="6" itemLabel="関西"/>
+                <f:selectItem itemValue="7" itemLabel="北陸"/>
+                <f:selectItem itemValue="8" itemLabel="中国-四国"/>
+                <f:selectItem itemValue="9" itemLabel="九州-沖縄"/> 
+            </h:selectManyCheckbox>
+            
+            <h:outputLabel value="（国外）："/>
+            <h:selectManyCheckbox value="#{MSR_Base.international}">
+                <f:selectItem itemValue="1" itemLabel="アメリカ"/>
+                <f:selectItem itemValue="2" itemLabel="南米诸国"/>
+                <f:selectItem itemValue="3" itemLabel="中国"/>
+                <f:selectItem itemValue="4" itemLabel="韓国"/>
+                <f:selectItem itemValue="5" itemLabel="東南アジア"/>
+                <f:selectItem itemValue="6" itemLabel="中東"/>
+                <f:selectItem itemValue="7" itemLabel="ヨーロッパ"/>
+                <f:selectItem itemValue="8" itemLabel="アメリカ大陸国"/>
+                <f:selectItem itemValue="9" itemLabel="南極大陸"/>
+            </h:selectManyCheckbox>
+            
+            <h:outputLabel value="好きな音楽のジャンルは："/>
+            <h:selectManyCheckbox value="#{MSR_Base.music}">
+                <f:selectItem itemValue="1" itemLabel="ポップス"/>
+                <f:selectItem itemValue="2" itemLabel="Jポップ"/>
+                <f:selectItem itemValue="3" itemLabel="Kポップ"/>
+                <f:selectItem itemValue="4" itemLabel="ロック"/>
+                <f:selectItem itemValue="5" itemLabel="ハードロック"/>
+                <f:selectItem itemValue="6" itemLabel="ジャズ"/>
+                <f:selectItem itemValue="7" itemLabel="RB レゲエ"/>
+                <f:selectItem itemValue="8" itemLabel="演歌"/>
+                <f:selectItem itemValue="9" itemLabel="くっラシック"/>
+                <f:selectItem itemValue="10" itemLabel="その他"/>
+            </h:selectManyCheckbox>
+            
+            <h:outputLabel value="好きなゲームのジャンルは："/>
+            <h:selectManyCheckbox value="#{MSR_Base.games}">
+                <f:selectItem itemValue="1" itemLabel="シューティング"/>
+                <f:selectItem itemValue="2" itemLabel="アクション"/>
+                <f:selectItem itemValue="3" itemLabel="アドベンチャー"/>
+                <f:selectItem itemValue="4" itemLabel="ロールプレイング"/>
+                <f:selectItem itemValue="5" itemLabel="格闘"/>
+                <f:selectItem itemValue="6" itemLabel="パズル"/>
+                <f:selectItem itemValue="7" itemLabel="レース"/>
+                <f:selectItem itemValue="8" itemLabel="シュミレーション"/>
+                <f:selectItem itemValue="9" itemLabel="音楽リズム"/>
+                <f:selectItem itemValue="10" itemLabel="その他"/>
+            </h:selectManyCheckbox>
+            
+            <h:outputLabel value="よくするショッピングは："/>
+            <h:selectManyListbox value="#{MSR_Base.shop}">
+                <f:selectItem itemValue="1" itemLabel="ファッション"/> 
+                <f:selectItem itemValue="2" itemLabel="ビューティー"/> 
+                <f:selectItem itemValue="3" itemLabel="ホーム・キッチン"/> 
+                <f:selectItem itemValue="4" itemLabel="スポーツ・アウトドア"/> 
+                <f:selectItem itemValue="5" itemLabel="本・コミック・雑誌"/> 
+                <f:selectItem itemValue="6" itemLabel="ミュージック"/> 
+                <f:selectItem itemValue="7" itemLabel="DVD・ブルーレイ"/> 
+                <f:selectItem itemValue="8" itemLabel="家電・カメラ・AV機器"/> 
+                <f:selectItem itemValue="9" itemLabel="パソコン・周辺機器"/> 
+                <f:selectItem itemValue="10" itemLabel="テレビゲーム"/> 
+                <f:selectItem itemValue="11" itemLabel="おもちゃ"/> 
+                <f:selectItem itemValue="12" itemLabel="ドラッグストア"/> 
+                <f:selectItem itemValue="13" itemLabel="車・バイク"/> 
+                <f:selectItem itemValue="14" itemLabel="食品・飲料・お酒"/> 
+            </h:selectManyListbox>    
+            </h:form>
+        <hr/>
+        <h:commandButton value="送信へ" action="#{MSR_Base.MSR_base()}"/>
+        
+    </h:body>
+</html>
+

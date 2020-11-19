@@ -1,0 +1,54 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"/>
+    </h:head>
+    <h:body>
+        <h2>ここはJSFテスト結果画面 ! !</h2>
+        <hr/>
+        <h:panelGrid columns="3" cellspacing="0" rules="all" border="1" columnClasses="column1,column2" width="200">
+            <f:facet name="header">入力されたデータ</f:facet>
+            <h:outputLabel value="名前："/>
+            <h:outputText value="#{MSRBase.name}"/>
+            
+            <h:outputLabel value="住所１："/>
+            <h:outputText value="#{MSRBase.ads}"/>
+            
+            <h:outputLabel value="住所２："/>
+            <h:outputText value="#{MSRBase.adss}"/>
+            
+            <h:outputLabel value="性別："/>
+            <h:outputText value="#{MSRBase.sex}"/>
+            
+            <h:outputLabel value="血液型："/>
+            <h:outputText value="#{MSRBase.blood}"/>
+            
+            <h:outputLabel value="電話番号："/>
+            <h:outputText value="#{MSRBase.phoneno}"/>
+            
+            <h:outputLabel value="生年月日："/>
+            <h:outputText value="#{MSRBase.date}">
+                <f:convertDateTime pattern="yyyy年M月d日"/>
+            </h:outputText>
+            
+            <h:outputLabel value="商品コード："/>
+            <h:outputText value="#{MSRBase.comcode}"/>
+            
+            <h:outputLabel value="商品価格："/>
+            <h:outputText value="#{MSRBase.comprice}">
+                <f:convertNumber type="currency" locale="ja_JP"/>
+            </h:outputText>
+                
+            <h:outputLabel value="商品数量："/>
+            <h:outputText value="#{MSRBase.comno}"/>
+        
+        </h:panelGrid>
+        <hr/>
+        <h:link outcome="index">入力画面へ</h:link>
+    </h:body>
+</html>
+
